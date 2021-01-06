@@ -3,7 +3,20 @@
 {% block title %} Create A Profile Page {% endblock %}
 
 {% block content %}
-
+<head>
+    <style>
+        body {
+            background-color: rgb(215, 232, 247)
+        }
+        h1 {
+            color:rgb(44, 84, 117);
+            font-family:Bookman, URW Bookman L, serif ;
+            }
+        p {
+            color:rgb(7, 20, 63);
+            }
+      </style>
+</head>
 {% if user.is_authenticated %}
 <h1>Create A Profile Page </h1><br><br>
 

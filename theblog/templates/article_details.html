@@ -3,10 +3,33 @@
 {% block title %} {{ post.title_tag }}{% endblock %}
 {% block content %}
 
-<div class="form-group">
-<h1>{{ post.title }} - {{ post.author.id}}</h1>
+<head>
+    <style>
+        body {
+            background-color: rgb(215, 232, 247);
+        }
+        h1 {
+            color:rgb(44, 84, 117);
+            font-family:New Century Schoolbook, TeX Gyre Schola, serif ;
+            }
+        p {
+            color:rgb(7, 20, 63);
+            font-family: Georgia, serif;
+            }
+        small {
+            font-style: italic
+        }
+        .form-group:hover {
+            cursor:pointer;
+        }
+        
+      </style>
+</head>
+
+<div class="form-group" id="card"><br><br>
+<h1><b>{{ post.title }} </b></h1>
 <small>Writted by: {{ post.author.first_name}}
-    {{ post.author.last_name}} - {{ post.post_date }}<br>
+    {{ post.author.last_name}} - {{ post.post_date }}<br><br><br>
     
 
     <div class="card mb-3" >
@@ -25,8 +48,9 @@
                 {{ post.author.last_name}}</b> </h5>
                 <p claqq="small text-muted">
 
+                    {% if post.author.profile.profile_page %}
                     <a href="{% url 'show_profile_page' post.author.profile.id %}"  >Profile Page | </a>
-
+                    {% endif %}
                     {% if post.author.profile.linkedin_url %}
                         <a href="{{ post.author.profile.linkedin_url }}" target="_blank">LinkedIn | </a>
                     {% endif %}
@@ -42,7 +66,7 @@
                     {% if post.author.profile.github_url %}
                         <a href="{{ post.author.profile.github_url }}" target="_blank">Github </a> </p>
                     {% endif %}
-
+                
               <p class="card-text">{{ post.author.profile.bio }}</p>
               </p>
             </div>
@@ -56,8 +80,7 @@
 <br>
     {% if user.is_authenticated %}
         {% if user.id == post.author.id %}
-     <a href="{% url 'update_post' post.pk %}">Edit  </a><br>
-    <a href="{% url 'delete_post' post.pk %}">Delete</a>
+     <a class="btn btn-dark" href="{% url 'update_post' post.pk %}">Edit  </a> <a class="btn btn-dark" href="{% url 'delete_post' post.pk %}">Delete</a>
         {% endif %}
     {% endif %}
 </small><br><hr><br>
@@ -69,6 +92,7 @@
 
 <br><br>
 {{ post.body | safe }}
+
 </div>
 
 <br><br>
@@ -94,28 +118,28 @@
 
 
         {% if user.is_authenticated %}
-            {% if user.id == post.author.id %}
-                    <h2>Comments</h2>
+            
+                    <h2>Comments</h2><br><br>
 
                 {% if not post.comments.all %}
-                    No comments <br>
-                    <a href="{% url 'add_comment' post.pk %}">Add Comments</a>
+                    No comments yet <br><br><br>
+                    <a class="btn btn-secondary btn-sm" href="{% url 'add_comment' post.pk %}">Add Comment</a>
 
                 {% else %}<br>
 
                         {% for comment in post.comments.all %}
-                            <b>{{ comment.name }}</b> - <small>{{ comment.date_added }}</small><br>
-                            {{ comment.body | safe  }}<br>
+                            <b>{{ comment.name }}</b> - <small>{{ comment.date_added }}</small><br><br>
+                           <p> {{ comment.body | safe  }}</p><br><br><br><hr>
                             
                         {% endfor %}
-                    <a href="{% url 'add_comment' post.pk %}">Add comment</a><br>
+                    <a class="btn btn-secondary btn-sm" href="{% url 'add_comment' post.pk %}">Add comment</a><br>
                 {% endif %}
-            {% endif %}
+           
         {% endif %}
 
     <br><br>
     <a href="{% url 'home' %}" class="btn btn-dark">Back home</a>
-</form>
+</form><br><br><br>
 
 
 {% endblock %} 

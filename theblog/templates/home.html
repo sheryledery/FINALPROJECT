@@ -1,9 +1,31 @@
 {% extends 'base.html' %}
      
 {% block content %}
+<head>
+    <style>
+        body {
+            background-color: rgb(215, 232, 247)
+        }
+        h1 {
+            color:rgb(44, 84, 117);
+            font-family:Bookman, URW Bookman L, serif ;
+            }
+        p {
+            color:rgb(38, 66, 158);
+            }
+        #bloc {
+          transition: 1s;
 
+        }
+        #bloc:hover {
+            transform: scale(1.1);
+         
+        }
 
-<h1>Posts</h1>
+      </style>
+</head>
+
+<div style="text-transform: uppercase;"><center><h1>Posts</h1></center></div><hr>
 
 <ul>
 
@@ -30,32 +52,37 @@
 </ul> -->
 
 
-{% for post in object_list %}
-<div class="container overflow-hidden">
+{% for post in object_list %}<br><br>
+<div class="container overflow-hidden" id="bloc">
     <div class="row gy-5">
       <div class="col-6">
-        <div class="p-3 border bg-light"><div class="card" style="width: 18rem;">
+      
+        <div class="p-3 border bg-light"><div class="card" style="width: 18rem; background-color: rgb(132, 190, 223);">
             <!-- <img src="..." class="card-img-top" alt="..."> -->
             <div class="card-body">
               <h5 class="card-title">{{ post.title }}</h5>
               <p class="card-text">{{ post.snippets }}</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Category : <a href="{% url 'category' post.category|slugify %}">
-                <b>{{ post.category }}</b></a></li>
+              <li class="list-group-item">Category : <a class="btn btn-outline-dark btn-sm" href="{% url 'category' post.category|slugify %}">
+                <b><div style="text-transform: uppercase;">{{ post.category }}</div></b></a></li>
               <li class="list-group-item">Author : {{ post.author.first_name }} 
                 {{ post.author.last_name }}</li>
-              <li class="list-group-item"><a href="{% url 'article-detail' post.pk %}">Read More</a></li>
+              
+                <li class="list-group-item"><a class="btn btn-outline-info" href="{% url 'article-detail' post.pk %}">Read More</a></li>
+              
+
             </ul>
             {% if user.is_authenticated %}
                 {% if user.id == post.author.id %}
                     <div class="card-body">
-                    <a href="{% url 'update_post' post.pk %}" class="card-link">Edit</a>
-                    <a href="{% url 'delete_post' post.pk %}" class="card-link">Delete</a>
+                    <a class="btn btn-secondary btn-sm" href="{% url 'update_post' post.pk %}" class="card-link">Edit</a>
+                    <a  class="btn btn-secondary btn-sm" href="{% url 'delete_post' post.pk %}" class="card-link">Delete</a>
                     </div>
                 {% endif %}
             {% endif %}
-          </div></div>
+
+          </div></div><br><br><br>
       </div>
       <!-- <div class="col-6">
         <div class="p-3 border bg-light"><div class="card" style="width: 18rem;">

@@ -3,14 +3,28 @@
 {% block title %} Comment {% endblock %}
 
 {% block content %}
+<head>
+    <style>
+        body {
+            background-color: rgb(215, 232, 247)
+        }
+        h1 {
+            color:rgb(44, 84, 117);
+            font-family:Bookman, URW Bookman L, serif ;
+            }
+        p {
+            color:rgb(7, 20, 63);
+            }
+      </style>
+</head>
 
-
-<h1>Add Comments </h1><br><br>
+<div style="text-transform: uppercase;"><center><h1>Add Comment</h1></center></div><hr><br><br>
 {% if user.is_authenticated %}
 <div class="form-group">
     <form method="POST" enctype="multipart/form-data">
 
         {% csrf_token %}
+        {{ form.media }}
         {{ form.as_p }}
         <button class="btn btn-dark">Submit</button>
 </div>

@@ -2,7 +2,23 @@
 {% load static %} 
 {% block content %}
 
-
+<head>
+  <style>
+      body {
+          background-color: rgb(215, 232, 247)
+      }
+      h1 {
+          color:rgb(44, 84, 117);
+          font-family:Bookman, URW Bookman L, serif ;
+          }
+      p {
+          color:rgb(7, 20, 63);
+          }
+      small {
+            font-style: italic
+        }
+    </style>
+</head>
 <h1>Profile </h1>
 
 <br>
@@ -21,7 +37,7 @@
         <div class="card-body">
           <h5 class="card-title" > <b>{{ page_user.user.first_name}}
             {{ page_user.user.last_name}}</b> </h5>
-            <p claqq="small text-muted">
+            <small><p claqq="small text-muted">
 
                 {% if page_user.linkedin_url %}
                     <a href="{{ page_user.linkedin_url }}" target="_blank">LinkedIn | </a>
@@ -38,12 +54,19 @@
                 {% if page_user.github_url %}
                     <a href="{{ page_user.github_url }}" target="_blank">Github </a> </p>
                 {% endif %}
-
+              </small>
           <p class="card-text">{{ page_user.bio }}</p>
           </p>
         </div>
       </div>
     </div>
   </div>
+  <div class="d-grid gap-2">
+  <a class="btn btn-secondary btn-sm" href="{% url 'edit_profile_page' user.profile.id  %}" class="card-link">Edit Profile</a>
+  </div>
 
+
+
+
+  
 {% endblock %}
