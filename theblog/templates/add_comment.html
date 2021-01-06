@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+     
+{% block title %} Comment {% endblock %}
+
+{% block content %}
+
+
+<h1>Add Comments </h1><br><br>
+{% if user.is_authenticated %}
+<div class="form-group">
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-dark">Submit</button>
+</div>
+
+
+{% else %}
+<p><b>Register <a href="{% url 'register' %}">here </a>to add a comment !<br>
+Already have an account ? Log In <a  href="{% url 'login' %}"> here </a></b></p>
+
+{% endif %}
+{% endblock %}

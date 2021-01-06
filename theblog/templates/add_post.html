@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+     
+{% block title %} Create a new post ! {% endblock %}
+
+{% block content %}
+
+
+<h1>Add a Post</h1><br><br>
+{% if user.is_authenticated %}
+<div class="form-group">
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <button class="btn btn-dark">Post</button>
+</div>
+
+<script>
+    var name = "{{ user.id }}";
+    document.getElementById("elder").value = name;
+</script>
+
+
+{% else %}
+<p><b>Register <a href="{% url 'register' %}">here </a>to add a post !<br>
+Already have an account ? Log In <a  href="{% url 'login' %}"> here </a></b></p>
+
+{% endif %}
+{% endblock %}

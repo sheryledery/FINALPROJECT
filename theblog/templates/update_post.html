@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Edit Post ! {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+        <h1>Edit Post</h1><br><br>
+
+        <div class="form-group">
+            <table>
+            <form method="POST">
+
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_table }}
+            </table>
+            <button class="btn btn-dark">Update</button>
+        </div>
+    {% else %}
+        You are not allowed here!
+    {% endif %}
+
+
+{% else %} 
+<p><b>Register <a href="{% url 'register' %}">here </a>to edit a post !<br>
+Already have an account ? Log In <a href="{% url 'login' %}">here </a> </b></p>
+{% endif %}
+
+{% endblock %}

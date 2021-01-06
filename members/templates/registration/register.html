@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+     
+{% block title %} Register {% endblock %}
+
+{% block content %}
+
+
+<h1>Register...</h1><br><br>
+
+<div class="form-group">
+    <form method="POST">
+
+      {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" class="form-control" name="username" placeholder="Username">
+            <div id="emailHelp" class="form-text">Letters, digits and @/./+/-/_ only.</div>
+          </div>
+    
+          <div class="mb-3">
+            <input type="text" class="form-control" name="first_name" placeholder="First Name">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Email">
+          </div>
+          <div class="mb-3">
+            <input type="password" class="form-control" name="password1" placeholder="Password">
+          </div>
+          <div class="mb-3">
+            <input type=password class="form-control" name="password2" placeholder="Confrim Password">
+        </div>
+        <button class="btn btn-dark">Sign In</button>
+</div><br>  <p>Already have an account ?</p>
+<p><b>Log In <a href="{% url 'login' %}">here </a>
+{% endblock %}
+
+        
+</div>
+<br><br>
+
+
+
+     
+
+
