@@ -52,6 +52,11 @@ class UserRegisterView(generic.CreateView):
     success_url = reverse_lazy('login')
 
 
+    def form_invalid(self, form):
+        print(form.errors)
+        return super().form_invalid(form)
+
+
 class UserEditView(generic.UpdateView):
     form_class =  EditProfileForm
     template_name = 'registration/edit_profile.html'
